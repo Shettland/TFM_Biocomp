@@ -1,1 +1,67 @@
+inputs:
+  - name: reference_data
+    metadata: https://data.nextstrain.org/files/ncov/open/reference/metadata.tsv.xz
+    sequences: https://data.nextstrain.org/files/ncov/open/reference/sequences.fasta.xz
+  - name: relecov_data
+    metadata: data/merged_bioinfo_processed_nextstrain_metadata.tsv
+    sequences: data/sequences.fasta
+
+# GenBank data includes "Wuhan-Hu-1/2019" which we use as the root for this build.
+refine:
+  root: "Wuhan-Hu-1/2019"
+
+builds:
+  relecov:
+    title: "Relecov Nextstrain build"
+    subsampling_scheme: spain
+    # Defines colorings for input data sources
+    # More at https://docs.nextstrain.org/projects/ncov/en/latest/analysis/customizing-visualization.html
+    auspice_config: config/auspice_config.json
+
+subsampling:
+  # Here we use the default subsampling logic for countries
+  spain:
+    # Focal samples for country
+    country:
+      group_by: "city month"
+      seq_per_group: 100
+      exclude: "--exclude-where 'country!=Spain'"
+    # Contextual samples from country's region
+    # region:
+    #  group_by: "country year month"
+    #  seq_per_group: 20
+    #  exclude: "--exclude-where 'country=Spain' 'region!=Europe'"
+    #  priorities:
+    #    type: "proximity"
+    #    focus: "country"
+    # Contextual samples from the rest of the world,
+    # excluding the current region to avoid resampling.
+    global:
+      group_by: "country year month"
+      seq_per_group: 10
+      exclude: "--exclude-where 'country=Spain'"
+      #priorities:
+      #  type: "proximity"
+      #  focus: "country"
+
+files:
+  lat_longs: config/lat_longs.tsv
+  exclude: config/dropped_strains.txt
+  reference: config/NC_045512.2_sars_ref.gb
+  description: config/description.md
+
+run_pangolin: false
+
+filter:
+  min_length: 27200
+
+frequencies:
+  min_date: 2020-02-24
+  max_date: 2023-05-10
+
+traits:
+  default:
+    sampling_bias_correction: 2.5
+    columns: ["country", "division"]
+  
 
