@@ -4,6 +4,8 @@ Auxiliar files for masther's thesis. Author: Pablo Mata Aroco
 ### Contents
 The repository includes the following:
 
-Data: Contains the datasets used for analysis and experiments.
-Code: Includes the code scripts or notebooks used for data processing, analysis, and generating the plots.
-Documentation: Includes additional documentation, such as supplementary materials.
+- Results_analysis.ipynb: Includes the code scripts used for data processing, analysis, and generating the plots.
+
+- Nextstrain: Includes custom scripts and configuration files used to run Nextstrain.
+
+- Viralrecon: Includes custom scripts and configuration files used to run Viralrecon.
