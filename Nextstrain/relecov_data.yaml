@@ -56,7 +56,7 @@ filter:
   min_length: 27200
 
 frequencies:
-  min_date: 2020-02-24
+  min_date: 2020-01-20
   max_date: 2023-05-10
 
 traits:
